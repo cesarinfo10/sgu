@@ -1,0 +1,35 @@
+.Titulo1{
+    font-size:22px;
+    font-family: Vegur, 'PT Sans', Verdana, sans-serif;
+    color: #024289;
+    background:#EEEFEE;
+}
+
+.Titulo2{
+    font-size:20px;
+    font-family: Vegur, 'PT Sans', Verdana, sans-serif;
+    color: #024289;
+    background:#EEEFEE;
+}
+
+.labelName{
+    font-weight:600;
+    font-size:18px;
+    color: #024289;;
+   font-family: sans-serif;
+  font-style: normal;
+ }
+
+.Tabla{
+     border-collapse: "collapse";
+}
+
+td {
+  margin: 15px;
+  padding: 5px;
+  border: 1px solid #ccc; /* Establece el borde para las celdas */
+}
+body {
+    background: #FFFFFF
+}
+    
