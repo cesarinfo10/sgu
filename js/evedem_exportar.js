@@ -8,14 +8,14 @@ function llamarBecasTBL(){
    if(anoPer =='Ver Todo') {
       anoPer = '0'
    }
-
+   $("#ap").val(anoPer);
     $.ajax({
       type: "GET",
       url: "models/evdem_exportar.model.php?getAllExportar&anoPer="+anoPer,
       data:"",
       success:function(data){
        $("#tblEvdem").html(data);
-
+      
 
        setTimeout(() => {
 				
@@ -65,6 +65,7 @@ function llamarBecasTBL(){
     table.destroy()*/
     
       $('#tblExporEvdem').DataTable({
+         "pageLength": 20,
          "language": {
          "sProcessing": "Procesando...",
          "sLengthMenu": "Mostrar MENU registros",

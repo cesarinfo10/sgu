@@ -1,3 +1,10 @@
+
+<style>
+
+.dataTables_filter {
+   float: left !important;
+}
+</style>
 <?php
 
 include('conexion.php');
@@ -282,7 +289,7 @@ order by  id asc";
    <input type="button" style="display: block;
    position: relative;
    z-index: 1000;
-   left: 7.8%;
+   left: 8.8%;
    bottom: 12px;
    border-radius: 5%;
    text-decoration: none;
@@ -592,7 +599,7 @@ glosa_tipo_ponderaciones
       
         <!-- Modal Header -->
         <div class="modal-header">
-          <h4 class="modal-title">Tipo Ponderador</h4>
+          <h4 class="modal-title">Tipo Ponderador Año: <div id="ap"></div></h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         
