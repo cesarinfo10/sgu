@@ -1,4 +1,4 @@
-
+<script src="../js/evedem_exportar.js"></script>
 <style>
 
 .dataTables_filter {
@@ -289,7 +289,7 @@ order by  id asc";
    <input type="button" style="display: block;
    position: relative;
    z-index: 1000;
-   left: 8.8%;
+   left: 9%;
    bottom: 12px;
    border-radius: 5%;
    text-decoration: none;

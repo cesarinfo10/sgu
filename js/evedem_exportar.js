@@ -1,5 +1,7 @@
+let anoPer = $('select[name="cmbPeriodos"] option:selected').text();
+$("#ap").val(anoPer);
 
-
+alert(anoPer);
 /*=============================================
 EVALUACIÓN
 =============================================*/
