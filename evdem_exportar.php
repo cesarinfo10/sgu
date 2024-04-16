@@ -1,29 +1,4 @@
 <script>
-/*function cambiaPeriodo() {	
-	var periodoSeleccionado = $("#cmbPeriodos").val();
-	enviarValores(periodoSeleccionado);
-}
-function almacenaVariable(nombreVariable, valor) {
-	var i=document.createElement('input');
-		i.type='hidden';
-		i.name=nombreVariable;
-		i.value=valor;
-		//f.appendChild(i);
-	return i;
-}
-
-function enviarValores(periodoSeleccionado){
-		var f = document.createElement('form');
-		f.action='?modulo=evdem_exportar';
-		f.method='POST';
-		f.target='_self';
-		
-		var i=document.createElement('input');
-		i = almacenaVariable("periodo_seleccionado", periodoSeleccionado);
-		f.appendChild(i);
-		document.body.appendChild(f);
-		f.submit();
-}*/
 
 </script> 
 <link href="/assets/bootstrap/css/bootstrap.css" rel="stylesheet">

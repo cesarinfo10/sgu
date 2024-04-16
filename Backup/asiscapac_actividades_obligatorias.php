@@ -1,13 +1,6 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<link href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css" rel="stylesheet">
-<link href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css" rel="stylesheet">
-<style>
-.dataTables_filter {
-   float: left !important;
-}
-</style>
 <?php
 function sacaSala($id_campo_actividades)
 {
@@ -962,7 +955,6 @@ $unidades = consulta_sql($sql_unidades);
       </td>
     </tr>
   </table>
-  <br/>
   <table id="id_tabla_profesores" cellspacing="1" cellpadding="2"  class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
 
     <?php if ($strActividad == "CERRADA") {
@@ -971,43 +963,39 @@ $unidades = consulta_sql($sql_unidades);
       $esconder = "";
     }
     ?>
- <thead>
+
     <tr class='filaTituloTabla'>
 
-      <th class='tituloTabla' style="display:none;">Año</th>
-      <th class='tituloTabla' style="display:none;">Origen</th>
-      <th class='tituloTabla' style="display:none;">Id Actividad</th>
-      <th class='tituloTabla' style="display:none;">Actividad</th>
-      <th class='tituloTabla' style="width: 200px;">Unidad</th>
-      <th class='tituloTabla'>Id Usuario</th>
-      <th class='tituloTabla' style="display:none;">username</th>
-      <th class='tituloTabla'>Apellido</th>
-      <th class='tituloTabla'>Nombre</th>
-      <th class='tituloTabla'>Email</th>
+      <td class='tituloTabla' style="display:none;">Año</td>
+      <td class='tituloTabla' style="display:none;">Origen</td>
+      <td class='tituloTabla' style="display:none;">Id Actividad</td>
+      <td class='tituloTabla' style="display:none;">Actividad</td>
+      <td class='tituloTabla'>Unidad</td>
+      <td class='tituloTabla'>Id Usuario</td>
+      <td class='tituloTabla' style="display:none;">username</td>
+      <td class='tituloTabla'>Apellido</td>
+      <td class='tituloTabla'>Nombre</td>
+      <td class='tituloTabla'>Email</td>
       <!--<td class='tituloTabla'>Tipo Check <br> Zoom <br> (anterior)</td>--> <!--glosa campo check-->
-      <th class='tituloTabla'>Estado</th>
-      <th class='tituloTabla' <?php echo ($esconder); ?>>Convocatoria a Todos <br> <input type='checkbox' id='id_todos_check'
-          name='id_todos_check' onclick="marcarTodos()"></th>
-      <th class='tituloTabla' <?php echo ($esconder); ?>>Presencial Convocados <br> <input type='checkbox' id='id_todos_check_pre'
-          name='id_todos_check_pre' onclick=marcarTodosPre()></th>
-      <th class='tituloTabla' <?php echo ($esconder); ?>>Online Convocados<br> <input type='checkbox' id='id_todos_check_on'
-          name='id_todos_check_on' onclick=marcarTodosOn()></th>
-      <th class='tituloTabla' <?php echo ($esconder); ?>>Asistio Convocados<br> <input type='checkbox' id='id_todos_check_as'
-          name='id_todos_check_as' onclick=marcarTodosAsis()></th>
-      <th class='tituloTabla'>Convocado</th>
-      <th class='tituloTabla'>Minutos <br> en reunión</th>
-      <th class='tituloTabla'>Observación</th>
+      <td class='tituloTabla'>Estado</td>
+      <td class='tituloTabla' <?php echo ($esconder); ?>>Convocatoria a Todos <br> <input type='checkbox' id='id_todos_check'
+          name='id_todos_check' onclick="marcarTodos()"></td>
+      <td class='tituloTabla' <?php echo ($esconder); ?>>Presencial Convocados <br> <input type='checkbox' id='id_todos_check_pre'
+          name='id_todos_check_pre' onclick=marcarTodosPre()></td>
+      <td class='tituloTabla' <?php echo ($esconder); ?>>Online Convocados<br> <input type='checkbox' id='id_todos_check_on'
+          name='id_todos_check_on' onclick=marcarTodosOn()></td>
+      <td class='tituloTabla' <?php echo ($esconder); ?>>Asistio Convocados<br> <input type='checkbox' id='id_todos_check_as'
+          name='id_todos_check_as' onclick=marcarTodosAsis()></td>
+      <td class='tituloTabla'>Convocado</td>
+      <td class='tituloTabla'>Minutos <br> en reunión</td>
+      <td class='tituloTabla'>Observación</td>
 
     </tr>
-    </thead>
-      <tbody>
     <?php
     $HTML_alumnos = "";
     if (count($funcionarios) > 0) {
-      foreach ($funcionarios as $key => $value) {
-
-     // for ($x = 0; $x < count($funcionarios); $x++) {
-        extract($funcionarios[$key]);
+      for ($x = 0; $x < count($funcionarios); $x++) {
+        extract($funcionarios[$x]);
         if ($convocado == "") {
           $convocado = "NO";
         }
@@ -1044,35 +1032,32 @@ $unidades = consulta_sql($sql_unidades);
           if($asis == 't'){
             $cka= 'checked ';
           }
-   
-         
-         
-         echo " <tr class='filaTabla'>
-             <td class='textoTabla' align='left' style='display:none;'>$ano</td>
-             <td class='textoTabla' align='left' style='display:none;'>$origen</td>
-             <td class='textoTabla' align='left' style='display:none;'>$id_campo_actividades</td>
-             <td class='textoTabla' align='left' style='display:none;'>$campo_glosa_actividades</td>
-             <td class='textoTabla' align='left'>$nombre_unidad</td>
-             <td class='textoTabla' align='right'>$id</td>
-             <td class='textoTabla' align='left' style='display:none;'>$nombre_usuario</td>
-             <td class='textoTabla' align='left'>$apellido</td>
-             <td class='textoTabla' align='left'>$nombre</td>
-             <td class='textoTabla' align='left'>$email</td>
-             <td class='textoTabla' align='left'><a class='enlaces' href='$enlbase=asiscapac_actividades_obligatorias_estado&id_asiscapac_actividades_obligatorias_funcionarios=$id_asiscapac_actividades_obligatorias_funcionarios&ano=$ano&id_actividad=$id_campo_actividades&id_usuario=$id&campo_id_check=$id_campo_check&id_observacion=$observacion'>$glosa_campo_check</a></td>
-             <td class='textoTabla' align='center' $esconder><input type='checkbox' id='id_incluir_$x' name='id_incluir_$x' onclick=armarQuerys()></td>
-             <td class='textoTabla' align='center' $esconder><input type='checkbox' id='id_incluir_pre$x' name='id_incluir_pre$x' onclick='updateCheckInd($id,$id_campo_actividades,1,$x)' $ckp></td>
-             <td class='textoTabla' align='center' $esconder><input type='checkbox' id='id_incluir_on$x' name='id_incluir_on$x' onclick='updateCheckInd($id,$id_campo_actividades,2,$x)' $cko></td>
-             <td class='textoTabla' align='center' $esconder><input type='checkbox' id='id_incluir_as$x' name='id_incluir_as$x' onclick='updateCheckInd($id,$id_campo_actividades,3,$x)' $cka></td>
-             <td class='textoTabla' align='left'></td>";
+
+          $HTML_funcionarios .= "  <tr class='filaTabla'>\n"
+            . "    <td class='textoTabla' align='left' style='display:none;'>$ano</td>\n"
+            . "    <td class='textoTabla' align='left' style='display:none;'>$origen</td>\n"
+            . "    <td class='textoTabla' align='left' style='display:none;'>$id_campo_actividades</td>\n"
+            . "    <td class='textoTabla' align='left' style='display:none;'>$campo_glosa_actividades</td>\n"
+            . "    <td class='textoTabla' align='left'>$nombre_unidad</td>\n"
+            . "    <td class='textoTabla' align='right'>$id</td>\n"
+            . "    <td class='textoTabla' align='left' style='display:none;'>$nombre_usuario</td>\n"
+            . "    <td class='textoTabla' align='left'>$apellido</td>\n"
+            . "    <td class='textoTabla' align='left'>$nombre</td>\n"
+            . "    <td class='textoTabla' align='left'>$email</td>\n"
+            . "    <td class='textoTabla' align='left'><a class='enlaces' href='$enlbase=asiscapac_actividades_obligatorias_estado&id_asiscapac_actividades_obligatorias_funcionarios=$id_asiscapac_actividades_obligatorias_funcionarios&ano=$ano&id_actividad=$id_campo_actividades&id_usuario=$id&campo_id_check=$id_campo_check&id_observacion=$observacion'>$glosa_campo_check</a></td>\n"
+            . "    <td class='textoTabla' align='center' $esconder><input type='checkbox' id='id_incluir_$x' name='id_incluir_$x' onclick=armarQuerys()></td>\n"
+            . "    <td class='textoTabla' align='center' $esconder><input type='checkbox' id='id_incluir_pre$x' name='id_incluir_pre$x' onclick='updateCheckInd($id,$id_campo_actividades,1,$x)' $ckp></td>\n"
+            . "    <td class='textoTabla' align='center' $esconder><input type='checkbox' id='id_incluir_on$x' name='id_incluir_on$x' onclick='updateCheckInd($id,$id_campo_actividades,2,$x)' $cko></td>\n"
+            . "    <td class='textoTabla' align='center' $esconder><input type='checkbox' id='id_incluir_as$x' name='id_incluir_as$x' onclick='updateCheckInd($id,$id_campo_actividades,3,$x)' $cka></td>\n"
+            . "    <td class='textoTabla' align='left'></td>\n"
             // . "    <td class='textoTabla' align='right'>$duracion_minutos_funcionario</td>\n"
-             echo ' <td class="textoTabla" align="left">
+            . '   <td class="textoTabla" align="left">
                   <div class="input-group mb-3" style="width: 110px;" ><input type="number" class="form-control" id="minutos_asis' . $x . '" aria-describedby="basic-addon2" value="'.$minutos.'"><div class="input-group-append">
                       <button class="btn btn-outline-secondary" type="button" onclick="updateMinuto('.$x.','.$id.','.$id_campo_actividades.')" id="minutos_btn'. $x .'"><i class="fas fa-save"></i></button>
                     </div>
-                    </div></td>';
-            echo "<td class='textoTabla' align='left'> <font size='1'>$myObservacion</font></td>
-                </tr>";
-          
+                    </div></td>'
+            . "    <td class='textoTabla' align='left'> <font size='1'>$myObservacion</font></td>\n"
+            . "  </tr>\n";
         } else { //CONVOCADO
           $minutos = $minutos_asis;
           if ($minutos == '' || $minutos == null){
@@ -1099,35 +1084,35 @@ $unidades = consulta_sql($sql_unidades);
             $cka= 'checked ';
           }
 
-          echo "<tr class='filaTabla'>
-               <td class='textoTabla' align='left' style='display:none;'>$ano</td>
-               <td class='textoTabla' align='left' style='display:none;'>$origen</td>
-               <td class='textoTabla' align='left' style='display:none;'>$id_campo_actividades</td>
-               <td class='textoTabla' align='left' style='display:none;'>$campo_glosa_actividades</td>
-               <td class='textoTabla' align='left'>$nombre_unidad</td>
-               <td class='textoTabla' align='right'>$id</td>
-               <td class='textoTabla' align='left' style='display:none;'>$nombre_usuario</td>
-               <td class='textoTabla' align='left'>$apellido</td>
-               <td class='textoTabla' align='left'>$nombre</td>
-               <td class='textoTabla' align='left'>$email</td>
-               <td class='textoTabla' align='left'><a class='enlaces' href='$enlbase=asiscapac_actividades_obligatorias_estado&id_asiscapac_actividades_obligatorias_funcionarios=$id_asiscapac_actividades_obligatorias_funcionarios&ano=$ano&id_actividad=$id_campo_actividades&id_usuario=$id&campo_id_check=$id_campo_check&id_observacion=$observacion'>$glosa_campo_check</a></td>
-               <td class='textoTabla' align='center' $esconder><input type='checkbox' id='id_incluir_$x' name='id_incluir_$x' onclick=armarQuerys()></td>
-               <td class='textoTabla' align='center' $esconder><input type='checkbox' id='id_incluir_pre$x' name='id_incluir_pre$x' onclick='updateCheckInd($id,$id_campo_actividades,1,$x)' $ckp></td>
-               <td class='textoTabla' align='center' $esconder><input type='checkbox' id='id_incluir_on$x' name='id_incluir_on$x' onclick='updateCheckInd($id,$id_campo_actividades,2,$x)' $cko></td>
-               <td class='textoTabla' align='center' $esconder><input type='checkbox' id='id_incluir_as$x' name='id_incluir_as$x' onclick='updateCheckInd($id,$id_campo_actividades,3,$x)' $cka></td>
-               <td class='textoTabla' align='left'>OK</td>";
+          $HTML_funcionarios .= "  <tr class='filaTabla'>\n"
+            . "    <td class='textoTabla' align='left' style='display:none;'>$ano</td>\n"
+            . "    <td class='textoTabla' align='left' style='display:none;'>$origen</td>\n"
+            . "    <td class='textoTabla' align='left' style='display:none;'>$id_campo_actividades</td>\n"
+            . "    <td class='textoTabla' align='left' style='display:none;'>$campo_glosa_actividades</td>\n"
+            . "    <td class='textoTabla' align='left'>$nombre_unidad</td>\n"
+            . "    <td class='textoTabla' align='right'>$id</td>\n"
+            . "    <td class='textoTabla' align='left' style='display:none;'>$nombre_usuario</td>\n"
+            . "    <td class='textoTabla' align='left'>$apellido</td>\n"
+            . "    <td class='textoTabla' align='left'>$nombre</td>\n"
+            . "    <td class='textoTabla' align='left'>$email</td>\n"
+            . "    <td class='textoTabla' align='left'><a class='enlaces' href='$enlbase=asiscapac_actividades_obligatorias_estado&id_asiscapac_actividades_obligatorias_funcionarios=$id_asiscapac_actividades_obligatorias_funcionarios&ano=$ano&id_actividad=$id_campo_actividades&id_usuario=$id&campo_id_check=$id_campo_check&id_observacion=$observacion'>$glosa_campo_check</a></td>\n"
+            . "    <td class='textoTabla' align='center' $esconder><input type='checkbox' id='id_incluir_$x' name='id_incluir_$x' onclick=armarQuerys()></td>\n"
+            . "    <td class='textoTabla' align='center' $esconder><input type='checkbox' id='id_incluir_pre$x' name='id_incluir_pre$x' onclick='updateCheckInd($id,$id_campo_actividades,1,$x)' $ckp></td>\n"
+            . "    <td class='textoTabla' align='center' $esconder><input type='checkbox' id='id_incluir_on$x' name='id_incluir_on$x' onclick='updateCheckInd($id,$id_campo_actividades,2,$x)' $cko></td>\n"
+            . "    <td class='textoTabla' align='center' $esconder><input type='checkbox' id='id_incluir_as$x' name='id_incluir_as$x' onclick='updateCheckInd($id,$id_campo_actividades,3,$x)' $cka></td>\n"
+            . "    <td class='textoTabla' align='left'>OK</td>\n"
             // . "    <td class='textoTabla' align='right'>$duracion_minutos_funcionario</td>\n"
-          echo'<td class="textoTabla" align="left">
+            . '     <td class="textoTabla" align="left">
                   <div class="input-group mb-3"><input type="number" class="form-control" id="minutos_asis' . $x . '" aria-describedby="basic-addon2" value="'.$minutos.'"><div class="input-group-append">
                       <button class="btn btn-outline-secondary" type="button" onclick="updateMinuto('.$x.','.$id.','.$id_campo_actividades.')" id="minutos_btn'. $x .'"><i class="fas fa-save"></i></button>
                     </div>
-                    </div></td>';
-          echo"<td class='textoTabla' align='left'> <font size='1'>$myObservacion</font></td>
-              </tr>";
+                    </div></td>'
+            . "    <td class='textoTabla' align='left'> <font size='1'>$myObservacion</font></td>\n"
+            . "  </tr>\n";
 
         }
       }
-    echo '</tbody>';
+
     } else {
       $HTML_funcionarios .= "  <tr>"
         . "    <td class='textoTabla' colspan='8'>"
@@ -1146,112 +1131,9 @@ $unidades = consulta_sql($sql_unidades);
 
 <!-- Fin: <?php echo ($modulo); ?> -->
 
-<script src="/assets/bootstrap/js/popper.min.js"></script>
-	<script src="/assets/bootstrap/js/bootstrap.min.js"></script>
-	<script src="/assets/datatables/jquery.dataTables.min.js"></script>
 
-	<!-- slimscrollbar scrollbar JavaScript -->
-	<script src="/assets/js/perfect-scrollbar.jquery.min.js"></script>
-    <!--Wave Effects -->
-    <script src="/assets/js/waves.js"></script>
-    <!--Menu sidebar -->
-    <script src="/assets/js/sidebarmenu.js"></script>
-    <!--stickey kit -->
-    <script src="/assets/sticky-kit-master/dist/sticky-kit.min.js"></script>
-    <script src=/assets/sparkline/jquery.sparkline.min.js></script>
-    <!--Custom JavaScript -->
-    <script src="/assets/js/custom.min.js"></script>
-
-    <!-- start - This is for export functionality only -->
-	<script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
-    <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
-    <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
-    <script src="/assets/styleswitcher/jQuery.style.switcher.js"></script>
 <script type="text/javascript">
-  setTimeout(() => {
-				
-        $(document).ready(function() {
-           $('#myTable').DataTable();
-           $(document).ready(function() {
-              var table = $('#example').DataTable({
-                 "columnDefs": [{
-                    "visible": false,
-                    "targets": 2
-                 }],
-                 "order": [
-                    [2, 'asc']
-                 ],
-                 "displayLength": 25,
-                 "drawCallback": function(settings) {
-                    var api = this.api();
-                    var rows = api.rows({
-                       page: 'current'
-                    }).nodes();
-                    var last = null;
-                    api.column(2, {
-                       page: 'current'
-                    }).data().each(function(group, i) {
-                       if (last !== group) {
-                          $(rows).eq(i).before('<tr class="group"><td colspan="5">' + group + '</td></tr>');
-                          last = group;
-                       }
-                    });
-                 }
-              });
-              // Order by the grouping
-              $('#example tbody').on('click', 'tr.group', function() {
-                 var currentOrder = table.order()[0];
-                 if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
-                    table.order([2, 'desc']).draw();
-                 } else {
-                    table.order([2, 'asc']).draw();
-                 }
-              });
-           });
-        });
 
-        /*  table.clear().draw();
-
-   //destroy datatable
-   table.destroy()*/
-   
-     $('#id_tabla_profesores').DataTable({
-        "pageLength": 20,
-        "language": {
-        "sProcessing": "Procesando...",
-        "sLengthMenu": "Mostrar MENU registros",
-        "sZeroRecords": "No se encontraron resultados",
-        "sEmptyTable": "Ningún dato disponible en esta tabla",
-        "info": "Mostrando _START_ de _END_ Total de Registros _TOTAL_",
-        "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
-        "sInfoFiltered": "(filtrado de un total de MAX registros)",
-        "sInfoPostFix": "",
-        "sSearch": "Buscar:",
-        "sUrl": "",
-        "sInfoThousands": ",",
-        "sLoadingRecords": "Cargando...",
-        "oPaginate": {
-           "sFirst": "Primero",
-           "sLast": "Último",
-           "sNext": "Siguiente",
-           "sPrevious": "Anterior"
-        },
-        "oAria": {
-           "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
-           "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-        }
-     },
-
-        dom: 'Bfrtip',
-        buttons: [
-           'excel', 'csv'
-        ]
-     });
-  }, 3000);
   function marcarTodos() {
     console.log("estot en marcarTodos");
 
@@ -1898,5 +1780,84 @@ $.ajax({
 
   );
 
+  setTimeout(() => {
+				
+        $(document).ready(function() {
+           $('#myTable').DataTable();
+           $(document).ready(function() {
+              var table = $('#example').DataTable({
+                 "columnDefs": [{
+                    "visible": false,
+                    "targets": 2
+                 }],
+                 "order": [
+                    [2, 'asc']
+                 ],
+                 "displayLength": 25,
+                 "drawCallback": function(settings) {
+                    var api = this.api();
+                    var rows = api.rows({
+                       page: 'current'
+                    }).nodes();
+                    var last = null;
+                    api.column(2, {
+                       page: 'current'
+                    }).data().each(function(group, i) {
+                       if (last !== group) {
+                          $(rows).eq(i).before('<tr class="group"><td colspan="5">' + group + '</td></tr>');
+                          last = group;
+                       }
+                    });
+                 }
+              });
+              // Order by the grouping
+              $('#example tbody').on('click', 'tr.group', function() {
+                 var currentOrder = table.order()[0];
+                 if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
+                    table.order([2, 'desc']).draw();
+                 } else {
+                    table.order([2, 'asc']).draw();
+                 }
+              });
+           });
+        });
 
+        /*  table.clear().draw();
+
+   //destroy datatable
+   table.destroy()*/
+   
+     $('#id_tabla_profesores').DataTable({
+       "pageLength": 20,
+        "language": {
+        "sProcessing": "Procesando...",
+        "sLengthMenu": "Mostrar MENU registros",
+        "sZeroRecords": "No se encontraron resultados",
+        "sEmptyTable": "Ningún dato disponible en esta tabla",
+        "info": "Mostrando _START_ de _END_ Total de Registros _TOTAL_",
+        "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+        "sInfoFiltered": "(filtrado de un total de MAX registros)",
+        "sInfoPostFix": "",
+        "sSearch": "Buscar:",
+        "sUrl": "",
+        "sInfoThousands": ",",
+        "sLoadingRecords": "Cargando...",
+        "oPaginate": {
+           "sFirst": "Primero",
+           "sLast": "Último",
+           "sNext": "Siguiente",
+           "sPrevious": "Anterior"
+        },
+        "oAria": {
+           "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+           "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+        }
+     },
+
+        dom: 'Bfrtip',
+        buttons: [
+           'excel', 'csv'
+        ]
+     });
+  }, 3000);
 </script>

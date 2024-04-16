@@ -1,7 +1,4 @@
-let anoPer = $('select[name="cmbPeriodos"] option:selected').text();
-$("#ap").val(anoPer);
-
-alert(anoPer);
+//alert(anoPer);
 /*=============================================
 EVALUACIÓN
 =============================================*/
@@ -10,7 +7,7 @@ function llamarBecasTBL(){
    if(anoPer =='Ver Todo') {
       anoPer = '0'
    }
-   $("#ap").val(anoPer);
+   //llamarAnos(anoPer);
     $.ajax({
       type: "GET",
       url: "models/evdem_exportar.model.php?getAllExportar&anoPer="+anoPer,

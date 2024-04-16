@@ -1,4 +1,9 @@
-<script src="../js/evedem_exportar.js"></script>
+<script>
+let anoPer = $('select[name="cmbPeriodos"] option:selected').text();	
+$("#anp").html('<h4 class="modal-title">Tipo Ponderador Año: '+ anoPer +' </h4>');
+
+	
+</script>
 <style>
 
 .dataTables_filter {
@@ -599,7 +604,7 @@ glosa_tipo_ponderaciones
       
         <!-- Modal Header -->
         <div class="modal-header">
-          <h4 class="modal-title">Tipo Ponderador Año: <div id="ap"></div></h4>
+		<div id="anp"></div>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         
@@ -611,13 +616,17 @@ glosa_tipo_ponderaciones
       <tr>
         <th>Tipo Ponderador</th>
         <th>Presentes</th>
-        <th>Resultado Final %</th>
+        <th>Resultado %</th>
       </tr>
     </thead>
     <tbody>';
+	$sumaPresente = 0;
+	$sumaResultado = 0;
 	while ($row = pg_fetch_row($resultPon)) {
 		if ($row[0] != '' || $row[0] != null)
 		{
+			$sumaPresente= $sumaPresente +$row[1];
+			$sumaResultado= $sumaResultado +ceil($row[2]);
 		echo '
       <tr>  
 	 
@@ -625,9 +634,16 @@ glosa_tipo_ponderaciones
         <td>'.$row[1].'</td>
         <td>'.ceil($row[2]).'%</td>
       </tr>';
+	  
 	}
 }
 	echo '
+	<tr>  
+	 
+	<td><strong>Totales</strong></td>
+	<td><strong>'.$sumaPresente.'</strong></td>
+	<td><strong>'.$sumaResultado.'%</strong></td>
+	</tr>
 	</tbody>
   </table>
 
