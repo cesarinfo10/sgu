@@ -1,6 +1,3 @@
-<script>
-
-</script> 
 <link href="/assets/bootstrap/css/bootstrap.css" rel="stylesheet">
 <link href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css" rel="stylesheet">
 <link href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css" rel="stylesheet">
@@ -10,14 +7,12 @@ if (!$_SESSION['autentificado']) {
 	header("Location: index.php");
 	exit;
 }
-if (isset($_POST['periodo_seleccionado'])) {
-	$periodoSeleccionado 			= $_POST['periodo_seleccionado'];
-} else {
+
 	$ss = "select id as id_vigente from periodo_eval where activo";
 	$sqlperiodo     = consulta_sql($ss);
 	extract($sqlperiodo[0]);	
 	$periodoSeleccionado = $id_vigente;
-}
+
 //echo("periodoSeleccionado = $periodoSeleccionado"."</br>");
 
 $id_usuario = $_SESSION['id_usuario'];
@@ -99,11 +94,11 @@ href='<?php echo($enlbase); ?>=evdem_periodo_evaluacion
 		file_put_contents($nombre_arch,$SQL_tabla_completa);
 //		echo("cinco");
 
-		$ss = "select id as id, mini_glosa as mini_glosa, activo as activo from periodo_eval";
+		$ss = "select id as id, mini_glosa as mini_glosa, activo as activo from periodo_eval order by mini_glosa desc";
 		$periodos = consulta_sql($ss);
 		$HTML_selectAno = "Resultado evaluación desempeño : 
 							<select name='cmbPeriodos' id='cmbPeriodos' onChange='llamarBecasTBL()'>";
-
+		
 		for ($x=0;$x<count($periodos);$x++) {
 			extract($periodos[$x]);
 			$sss = "";
@@ -111,6 +106,7 @@ href='<?php echo($enlbase); ?>=evdem_periodo_evaluacion
 			if ($id == $periodoSeleccionado) {
 				$sss = "selected";
 			}
+
 			$HTML_selectAno .="<option value='$id' $sss>$mini_glosa</option>";
 		}	
 
@@ -167,7 +163,7 @@ href='<?php echo($enlbase); ?>=evdem_periodo_evaluacion
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
 	
-		<script>
+	<script>
 			llamarBecasTBL();
 
     </script>

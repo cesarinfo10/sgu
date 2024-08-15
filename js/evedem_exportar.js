@@ -1,13 +1,11 @@
-//alert(anoPer);
 /*=============================================
 EVALUACIÓN
 =============================================*/
 function llamarBecasTBL(){
-   let anoPer = $('select[name="cmbPeriodos"] option:selected').text();
-   if(anoPer =='Ver Todo') {
-      anoPer = '0'
-   }
-   //llamarAnos(anoPer);
+   //let anoPer = $('select[name="cmbPeriodos"] option:selected').text();
+   let anoPer = $('#cmbPeriodos').val();
+
+    //llamarAnos(anoPer);
     $.ajax({
       type: "GET",
       url: "models/evdem_exportar.model.php?getAllExportar&anoPer="+anoPer,
