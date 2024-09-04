@@ -71,8 +71,7 @@ actualizaPorcentajeCapacitacion();
 		. "    <td colspan='2' align='center' class='tituloTabla'><b>necesidad_capacitacion</b></td>".$LF
 		. "    <td colspan='2' align='center' class='tituloTabla'><b>comentario_desempeno</b></td>".$LF
 		. "  </tr>
-		</thead>".$LF;
-		
+		</thead>".$LF;		
 //echo("uno");
 		$id_sesion = $_SESSION['usuario']."_".$modulo."_".session_id();
 //		echo("dos");		

@@ -1,6 +1,6 @@
 <script>
 let anoPer = $('select[name="cmbPeriodos"] option:selected').text();	
-$("#anp").html('<h4 class="modal-title">Tipo Ponderador Año: '+ anoPer +' </h4>');
+$("#anp").html('<h4 class="modal-title">Tipo Ponderador Años: '+ anoPer +' </h4>');
 
 	
 </script>
@@ -27,8 +27,7 @@ if (isset($_GET['getAllExportar'])){
 	
     $dbconn = db_connect();
 
-    $query = "SELECT 
-	id, 
+    $query = "SELECT id,
 	nombre, 
 	glosa_tipo_ponderaciones, 
 	unidad, 
@@ -58,8 +57,7 @@ if (isset($_GET['getAllExportar'])){
 	p4_direccion,
 	esfuerzo_de_mejora,
 	necesidad_capacitacion,
-	comentario_desempeno		
-	from (
+	comentario_desempeno from (
 select 
 u.id as id, 
 u.nombre || ' ' || u.apellido as nombre, 
@@ -386,10 +384,12 @@ order by  id asc";
 	
 
 	$queryPon = "SELECT 
-
-	glosa_tipo_ponderaciones, 
-	COUNT(glosa_tipo_ponderaciones)	as total,
-	( sum(final_resultado) / COUNT(final_resultado) ) Por
+    glosa_tipo_ponderaciones,
+ 	TRIM(TRAILING '.' FROM TRIM(TRAILING '0' FROM TO_CHAR(ROUND(AVG(poa)::numeric, 2), 'FM999999990.00'))) AS poa,
+    TRIM(TRAILING '.' FROM TRIM(TRAILING '0' FROM TO_CHAR(ROUND(AVG(resulteval)::numeric, 2), 'FM999999990.00'))) AS resulteval,
+    TRIM(TRAILING '.' FROM TRIM(TRAILING '0' FROM TO_CHAR(ROUND(AVG(asistencia)::numeric, 2), 'FM999999990.00'))) AS asistencia,
+    TRIM(TRAILING '.' FROM TRIM(TRAILING '0' FROM TO_CHAR(ROUND(AVG(capacitacion)::numeric, 2), 'FM999999990.00'))) AS capacitacion, 
+    TRIM(TRAILING '.' FROM TRIM(TRAILING '0' FROM TO_CHAR(ROUND(AVG(final_resultado)::numeric, 2), 'FM999999990.00'))) AS Porcentaje
 	from (
 select 
 u.id as id, 
@@ -582,22 +582,20 @@ left join gestion.unidades as gu on gu.id = u.id_unidad
 left join usuarios_jerarquia as uj on uj.id_evaluado = u.id 
 								and uj.id_evaluador <> u.id 
 								$periodo
-where u.tipo <> 3 and u.activo
-and u.id_unidad is not null
-)
-as tabla
+	where u.tipo <> 3 and u.activo
+	and u.id_unidad is not null
+	)
+	as tabla
 
-group by 
-glosa_tipo_ponderaciones
+	group by 
+	glosa_tipo_ponderaciones
 ";
-		$resultPon = pg_query($dbconn, $queryPon) or die('La consulta fallo: ' . pg_last_error());
+
+$resultPon = pg_query($dbconn, $queryPon) or die('La consulta fallo: ' . pg_last_error());
 
 
-    echo '
-        </tbody>
+    echo '</tbody>
     </table>
-	
-	
 	<div class="modal" id="myModal">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
@@ -613,38 +611,35 @@ glosa_tipo_ponderaciones
          
 		<table class="table table-striped">
     <thead>
-      <tr>
+	   <tr>  
         <th>Tipo Ponderador</th>
-        <th>Presentes</th>
-        <th>Resultado %</th>
+		<th>PROCON</th>
+		<th>Ev.Jefe</th>
+        <th>Asistencia</th>
+		<th>Capacitación</th>
+        <th>Total %</th>
       </tr>
-    </thead>
+	</thead>
     <tbody>';
 	$sumaPresente = 0;
 	$sumaResultado = 0;
 	while ($row = pg_fetch_row($resultPon)) {
 		if ($row[0] != '' || $row[0] != null)
 		{
-			$sumaPresente= $sumaPresente +$row[1];
-			$sumaResultado= $sumaResultado +ceil($row[2]);
+			/*$sumaPresente= $sumaPresente +$row[1];
+			$sumaResultado= $sumaResultado +ceil($row[2]);*/
 		echo '
-      <tr>  
-	 
+      <tr>
 	  	<td>'.$row[0].'</td>
-        <td>'.$row[1].'</td>
-        <td>'.ceil($row[2]).'%</td>
-      </tr>';
-	  
-	}
-}
-	echo '
-	<tr>  
-	 
-	<td><strong>Totales</strong></td>
-	<td><strong>'.$sumaPresente.'</strong></td>
-	<td><strong>'.$sumaResultado.'%</strong></td>
-	</tr>
-	</tbody>
+		<td>'.($row[1]).'%</td>
+		<td>'.($row[2]).'%</td>
+        <td>'.($row[3]).'%</td>
+		<td>'.($row[4]).'%</td>
+        <td>'.($row[5]).'%</td>';
+	  }
+	  echo'</tr>';
+	  }
+	echo'</tbody>
   </table>
 
         </div>
